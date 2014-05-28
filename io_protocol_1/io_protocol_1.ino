@@ -17,14 +17,10 @@ void setup(){
   Serial.begin(BAUD);
   iop.comment();
   iop.println("started");
+  analogReference(INTERNAL2V56);// a built-in 2.56V reference (Arduino Mega only)
 }
 void loop(){
   if (ticker.check()){
     iop.sendAnalog(FIRST_PORT,NUM_PORTS); 
   } 
 }
-
-
-
-
-
