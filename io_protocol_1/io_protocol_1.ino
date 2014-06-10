@@ -11,16 +11,26 @@
 IOP iop;
 Interval ticker(PERIOD);
 
-int value[NUM_PORTS];
+int value = 0;
 
 void setup(){
   Serial.begin(BAUD);
   iop.comment();
   iop.println("started");
-  analogReference(INTERNAL2V56);// a built-in 2.56V reference (Arduino Mega only)
+  //  analogReference(INTERNAL2V56);// a built-in 2.56V reference (Arduino Mega only)
+  VU_setup();
 }
+
 void loop(){
   if (ticker.check()){
     iop.sendAnalog(FIRST_PORT,NUM_PORTS); 
+    value = (value*2+analogRead(A0))/3;
+    VU_down(value);
   } 
 }
+
+
+
+
+
+
